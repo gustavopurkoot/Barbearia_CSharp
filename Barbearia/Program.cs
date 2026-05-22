@@ -28,11 +28,11 @@ app.MapGet("/Servicos", (AppDataContext context) =>
 
 app.MapGet("/Agendamentos", (AppDataContext context) =>
 {
-    return context.Agendamentos;
+    return context.Agendamentos.Include(a => a.servico);
 });
 
 app.MapGet("/servicos/{id}", (int id, AppDataContext context) =>
-{
+{   
     var servico = context.Servicos.Find(id);
     if (servico is null) return Results.NotFound();
     return Results.Ok(servico);
@@ -70,6 +70,14 @@ app.MapPost("/Agendamentos", (Agendamento agendamento, AppDataContext context) =
             return Results.BadRequest("Já existe um agendamento para essa data e hora.");
         }
     }
+
+    var servico = context.Servicos.Find(agendamento.ServicoId);
+    if (servico is null)
+    {
+        return Results.BadRequest("ServicoId inválido");
+    }
+
+    agendamento.servico = servico;
 
     context.Agendamentos.Add(agendamento);
     context.SaveChanges();
