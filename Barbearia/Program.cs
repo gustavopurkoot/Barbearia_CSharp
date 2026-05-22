@@ -28,7 +28,7 @@ app.MapGet("/Servicos", (AppDataContext context) =>
 
 app.MapGet("/Agendamentos", (AppDataContext context) =>
 {
-    return context.Agendamentos.Include(a => a.servico);
+    return context.Agendamentos.Include(agendamento => agendamento.servico);
 });
 
 app.MapGet("/servicos/{id}", (int id, AppDataContext context) =>
