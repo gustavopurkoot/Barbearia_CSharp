@@ -40,7 +40,7 @@ app.MapGet("/servicos/{id}", (int id, AppDataContext context) =>
 
 app.MapGet("/agendamentos/{id}", (int id, AppDataContext context) =>
 {
-    var agendamento = context.Agendamentos.Find(id);
+    var agendamento = context.Agendamentos.Include(a => a.servico).FirstOrDefault(a => a.Id == id);
     if (agendamento is null) return Results.NotFound();
     return Results.Ok(agendamento);
 });
