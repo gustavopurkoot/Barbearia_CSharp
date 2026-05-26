@@ -6,7 +6,7 @@ class Agendamento
     public DateTime dataHora {set; get; }
     public string status {set; get; } = "Pendente";
 
-    public Servico servico {set; get; }
+    public Servico Servico {set; get; }
     public int ServicoId {set; get; }
 
 }

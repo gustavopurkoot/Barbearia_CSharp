@@ -28,7 +28,7 @@ app.MapGet("/Servicos", (AppDataContext context) =>
 
 app.MapGet("/Agendamentos", (AppDataContext context) =>
 {
-    return context.Agendamentos.Include(agendamento => agendamento.servico);
+    return context.Agendamentos.Include(agendamento => agendamento.Servico);
 });
 
 app.MapGet("/servicos/{id}", (int id, AppDataContext context) =>
@@ -40,7 +40,7 @@ app.MapGet("/servicos/{id}", (int id, AppDataContext context) =>
 
 app.MapGet("/agendamentos/{id}", (int id, AppDataContext context) =>
 {
-    var agendamento = context.Agendamentos.Include(a => a.servico).FirstOrDefault(a => a.Id == id);
+    var agendamento = context.Agendamentos.Include(a => a.Servico).FirstOrDefault(a => a.Id == id);
     if (agendamento is null) return Results.NotFound();
     return Results.Ok(agendamento);
 });
@@ -77,7 +77,7 @@ app.MapPost("/Agendamentos", (Agendamento agendamento, AppDataContext context) =
         return Results.BadRequest("ServicoId inválido");
     }
 
-    agendamento.servico = servico;
+    agendamento.Servico = servico;
 
     context.Agendamentos.Add(agendamento);
     context.SaveChanges();
@@ -114,8 +114,8 @@ app.MapPut("/agendamentos/{id}", (int id, Agendamento novo, AppDataContext conte
         agendamento.clienteNome = novo.clienteNome;
         agendamento.dataHora = novo.dataHora;
         agendamento.status = novo.status;
-        agendamento.servico = context.Servicos.Find(novo.ServicoId);
-        if (agendamento.servico is null)
+        agendamento.Servico = context.Servicos.Find(novo.ServicoId);
+        if (agendamento.Servico is null)
         {
             return Results.BadRequest("ServicoId inválido");
         }
