@@ -41,7 +41,7 @@ dotnet ef database update
 dotnet run
 ```
 
-A API estará disponível em `https://localhost:5001` ou `http://localhost:5000`.
+A API estará disponível em `http://localhost:5144`.
 
 ## 🛠️ Tecnologias Utilizadas
 
