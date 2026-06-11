@@ -6,7 +6,6 @@ API REST para gerenciamento de serviços e agendamentos de uma barbearia.
 
 - Gustavo Purkoot
 - Lucas Kirsten
-- Menando Sales
 
 ## 📋 Descrição
 
@@ -81,17 +80,17 @@ A API estará disponível em `http://localhost:5144`.
 ### Cadastrar Serviço
 ```json
 {
-  "nome": "Corte",
-  "preco": 35.00,
-  "duracaoMinutos": 30
+  "nome": "Corte Social",
+  "preco": 25.00,
+  "duracaoMinutos": 20
 }
 ```
 
 ### Cadastrar Agendamento
 ```json
 {
-  "clienteNome": "João Silva",
-  "dataHora": "2026-06-10T14:00:00",
+  "clienteNome": "Lucas Kirsten",
+  "dataHora": "2026-11-06T16:00:00",
   "status": "Pendente",
   "servicoId": 1
 }
