@@ -1,5 +1,5 @@
 namespace Barbearia.Models;
-class Agendamento
+public class Agendamento
 {
     public int Id {set; get; }
     public string clienteNome {set; get; }

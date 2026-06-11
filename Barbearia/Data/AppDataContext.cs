@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Barbearia.Models;
 namespace Barbearia.Data;
 
-class AppDataContext : DbContext
+public class AppDataContext : DbContext
 {
 
     public AppDataContext(DbContextOptions<AppDataContext>

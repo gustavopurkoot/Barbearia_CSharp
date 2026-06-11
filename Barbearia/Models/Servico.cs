@@ -1,5 +1,5 @@
 namespace Barbearia.Models;
-class Servico
+public class Servico
 {
     public int Id {set; get; }
     public string nome {set; get; }
