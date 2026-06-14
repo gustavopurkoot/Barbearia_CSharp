@@ -32,7 +32,7 @@ app.MapGet("/Agendamentos", (AppDataContext context) =>
 });
 
 app.MapGet("/servicos/{id}", (int id, AppDataContext context) =>
-{   
+{
     var servico = context.Servicos.Find(id);
     if (servico is null) return Results.NotFound();
     return Results.Ok(servico);
@@ -47,7 +47,7 @@ app.MapGet("/agendamentos/{id}", (int id, AppDataContext context) =>
 
 app.MapPost("/Servicos", (Servico servico, AppDataContext context) =>
 {
-    if(servico.preco <= 0)
+    if (servico.preco <= 0)
     {
         return Results.BadRequest("O preço deve ser maior que zero.");
     }
@@ -59,13 +59,13 @@ app.MapPost("/Servicos", (Servico servico, AppDataContext context) =>
 
 app.MapPost("/Agendamentos", (Agendamento agendamento, AppDataContext context) =>
 {
-    if(agendamento.dataHora < DateTime.Now)
+    if (agendamento.dataHora < DateTime.Now)
     {
         return Results.BadRequest("A data e hora do agendamento devem ser futuras.");
     }
-    foreach(var ag in context.Agendamentos)
+    foreach (var ag in context.Agendamentos)
     {
-        if(ag.dataHora == agendamento.dataHora)
+        if (ag.dataHora == agendamento.dataHora)
         {
             return Results.BadRequest("Já existe um agendamento para essa data e hora.");
         }
