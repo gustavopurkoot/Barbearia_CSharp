@@ -1,15 +1,14 @@
 ﻿# 💈 Barbearia API
 
-API REST para gerenciamento de serviços e agendamentos de uma barbearia.
+API REST para gerenciamento de serviços e agendamentos de uma barbearia, desenvolvida em .NET 10.
 
-## 👥 Integrantes
+## 👤 Autor
 
-- Gustavo Purkoot
-- Lucas Kirsten
+**Gustavo Purkoot Ferreira**
 
 ## 📋 Descrição
 
-Sistema de gerenciamento de barbearia com cadastro de serviços e agendamentos. Permite criar e gerenciar os serviços oferecidos pela barbearia, além de realizar agendamentos vinculados a esses serviços.
+Sistema de gerenciamento de barbearia com cadastro de serviços e agendamentos. Permite criar e gerenciar os serviços oferecidos pela barbearia, além de realizar agendamentos vinculados a esses serviços com validações de regras de negócio.
 
 ## 🚀 Instruções de Execução
 
@@ -49,7 +48,7 @@ A API estará disponível em `http://localhost:5144`.
 - **SQLite** — banco de dados local
 - **JSON** — formato de comunicação
 
-## 📦 Funcionalidades Implementadas
+## 📦 Endpoints
 
 ### Serviços
 | Método | Rota | Descrição |
@@ -89,7 +88,7 @@ A API estará disponível em `http://localhost:5144`.
 ### Cadastrar Agendamento
 ```json
 {
-  "clienteNome": "Lucas Kirsten",
+  "clienteNome": "João Silva",
   "dataHora": "2026-11-06T16:00:00",
   "status": "Pendente",
   "servicoId": 1
