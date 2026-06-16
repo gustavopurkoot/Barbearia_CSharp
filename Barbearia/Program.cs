@@ -57,32 +57,35 @@ app.MapPost("/Servicos", (Servico servico, AppDataContext context) =>
      servico);
 });
 
-app.MapPost("/Agendamentos", (Agendamento agendamento, AppDataContext context) =>
+app.MapPost("/Agendamentos", (Agendamento novoAgendamento, AppDataContext context) =>
 {
-    if (agendamento.dataHora < DateTime.Now)
-    {
-        return Results.BadRequest("A data e hora do agendamento devem ser futuras.");
-    }
-    foreach (var ag in context.Agendamentos)
-    {
-        if (ag.dataHora == agendamento.dataHora)
-        {
-            return Results.BadRequest("Já existe um agendamento para essa data e hora.");
-        }
-    }
+    var servicoNovo = context.Servicos.Find(novoAgendamento.ServicoId);
 
-    var servico = context.Servicos.Find(agendamento.ServicoId);
-    if (servico is null)
+    if (servicoNovo is null)
     {
         return Results.BadRequest("ServicoId inválido");
     }
 
-    agendamento.Servico = servico;
+    if (novoAgendamento.dataHora < DateTime.Now)
+    {
+        return Results.BadRequest("A data e hora do agendamento devem ser futuras.");
+    }
 
-    context.Agendamentos.Add(agendamento);
+    foreach (var agendamentoExistente in context.Agendamentos.Include(a => a.Servico))
+    {
+        if (novoAgendamento.dataHora < agendamentoExistente.dataHora.AddMinutes(agendamentoExistente.Servico.duracaoMinutos) &&
+            novoAgendamento.dataHora.AddMinutes(servicoNovo.duracaoMinutos) > agendamentoExistente.dataHora)
+        {
+            return Results.BadRequest("Já existe um agendamento nesse horário.");
+        }
+    }
+
+    novoAgendamento.Servico = servicoNovo;
+
+    context.Agendamentos.Add(novoAgendamento);
     context.SaveChanges();
-    return Results.Created($"/agendamentos/{agendamento.Id}",
-     agendamento);
+
+    return Results.Created($"/agendamentos/{novoAgendamento.Id}", novoAgendamento);
 });
 
 app.MapPut("/servicos/{id}", (int id, Servico novo, AppDataContext context) =>
