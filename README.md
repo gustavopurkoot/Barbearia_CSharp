@@ -72,7 +72,7 @@ A API estará disponível em `http://localhost:5144`.
 
 - Preço do serviço deve ser maior que zero
 - Não é permitido agendar em data/hora passada
-- Não é permitido dois agendamentos no mesmo horário
+- Validação de conflito de horário: verifica se o novo agendamento se sobrepõe a algum já existente, levando em conta a duração de cada serviço (ex: um corte de 20 min às 14h bloqueia agendamentos entre 14h e 14h20, não só o horário exato)
 
 ## 📝 Exemplos de JSON
 
