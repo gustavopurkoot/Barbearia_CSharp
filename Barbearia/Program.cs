@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<AppDataContext>(options =>
-options.UseSqlite("Data Source=produtos.db"));
+options.UseSqlite("Data Source=Barbearia.db"));
 
 var app = builder.Build();
 
